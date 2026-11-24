@@ -71,3 +71,33 @@ export interface BookingValidationError {
 export type BookingOperationResult<T> =
   | { success: true; data: T }
   | { success: false; errors: readonly BookingValidationError[] };
+
+export type BookingManagementErrorCode =
+  | "booking-not-found"
+  | "booking-reference-conflict"
+  | "invalid-status-transition"
+  | "cancellation-not-permitted"
+  | "storage-error";
+
+export interface BookingManagementError {
+  code: BookingManagementErrorCode;
+  message: string;
+}
+
+export type BookingManagementResult<T> =
+  | { success: true; data: T }
+  | { success: false; error: BookingManagementError };
+
+export type BookingConfirmationEvent = Pick<
+  Event,
+  "id" | "title" | "date" | "time" | "venue" | "city"
+>;
+
+export interface BookingConfirmationData {
+  reference: string;
+  event: BookingConfirmationEvent | null;
+  customer: BookingCustomer;
+  priceBreakdown: BookingPriceSummary;
+  status: BookingStatus;
+  createdAt: string;
+}
