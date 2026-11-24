@@ -1,30 +1,25 @@
 @import "tailwindcss";
 
 :root {
-  --color-navy: #172733;
-  --color-navy-deep: #101c26;
-  --color-coral: #f36b4f;
-  --color-coral-dark: #c65a43;
-  --color-paper: #f8f6f1;
-  --color-surface: #fffdfa;
-  --color-ink: #222a2e;
-  --color-muted: #787d7c;
-  --color-border: #e8e4dc;
-  --color-muted-surface: #f0eee8;
-  --focus-ring: #ffb08f;
+  --color-violet: #7357ff;
+  --color-charcoal: #111827;
+  --color-lime: #c7f36b;
+  --color-lavender: #f4f1ff;
+  --color-white: #ffffff;
+  --color-secondary: #6b7280;
+  --color-border: #e5e7eb;
+  --color-muted-surface: #f9fafb;
+  --focus-ring: #7357ff;
 }
 
 @theme inline {
-  --font-sans: "DM Sans", "Segoe UI", sans-serif;
-  --font-serif: "DM Serif Display", Georgia, serif;
-  --color-navy: var(--color-navy);
-  --color-navy-deep: var(--color-navy-deep);
-  --color-coral: var(--color-coral);
-  --color-coral-dark: var(--color-coral-dark);
-  --color-paper: var(--color-paper);
-  --color-surface: var(--color-surface);
-  --color-ink: var(--color-ink);
-  --color-muted: var(--color-muted);
+  --font-sans: "DM Sans", "Inter", "Segoe UI", sans-serif;
+  --color-violet: var(--color-violet);
+  --color-charcoal: var(--color-charcoal);
+  --color-lime: var(--color-lime);
+  --color-lavender: var(--color-lavender);
+  --color-white: var(--color-white);
+  --color-secondary: var(--color-secondary);
   --color-border: var(--color-border);
   --color-muted-surface: var(--color-muted-surface);
 }
@@ -43,9 +38,9 @@ body {
   min-height: 100vh;
   margin: 0;
   overflow-x: hidden;
-  background: var(--color-paper);
-  color: var(--color-ink);
-  font-family: "DM Sans", "Segoe UI", sans-serif;
+  background: var(--color-white);
+  color: var(--color-charcoal);
+  font-family: "DM Sans", "Inter", "Segoe UI", sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -70,8 +65,8 @@ textarea:focus-visible {
 }
 
 ::selection {
-  background: #ffd1bd;
-  color: var(--color-navy);
+  background: var(--color-lime);
+  color: var(--color-charcoal);
 }
 
 @media (prefers-reduced-motion: reduce) {

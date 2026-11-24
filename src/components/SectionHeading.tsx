@@ -17,15 +17,15 @@ export default function SectionHeading({
     <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
       <div className="max-w-2xl">
         {eyebrow && (
-          <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-coral-dark">
+          <p className="mb-3 text-xs font-extrabold uppercase tracking-[0.16em] text-violet">
             {eyebrow}
           </p>
         )}
-        <h2 className="font-serif text-4xl leading-tight tracking-[-0.045em] text-ink sm:text-5xl">
+        <h2 className="font-sans text-4xl font-extrabold leading-[1.05] tracking-[-0.055em] text-charcoal sm:text-5xl">
           {heading}
         </h2>
         {description && (
-          <p className="mt-4 max-w-xl text-base leading-7 text-muted">
+          <p className="mt-4 max-w-xl text-base leading-7 text-secondary">
             {description}
           </p>
         )}

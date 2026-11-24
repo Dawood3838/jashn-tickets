@@ -22,7 +22,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <body className="flex min-h-screen flex-col">
         <a
-          className="absolute left-3 top-3 z-50 -translate-y-24 rounded-md bg-paper px-4 py-3 text-sm font-semibold text-ink transition-transform focus:translate-y-0"
+          className="absolute left-3 top-3 z-50 -translate-y-24 rounded-md bg-white px-4 py-3 text-sm font-semibold text-charcoal transition-transform focus:translate-y-0"
           href="#main-content"
         >
           Skip to content

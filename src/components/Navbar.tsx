@@ -9,33 +9,31 @@ const navigationLinks = [
 
 export default function Navbar() {
   return (
-    <header className="border-b border-white/10 bg-navy text-paper">
+    <header className="sticky top-0 z-20 border-b border-charcoal/10 bg-white/90 text-charcoal shadow-[0_4px_20px_rgba(17,24,39,0.04)] backdrop-blur-md">
       <div className="mx-auto flex w-[min(100%-2.5rem,1180px)] flex-wrap items-center justify-between gap-x-8 gap-y-3 py-4 sm:min-h-20 sm:flex-nowrap sm:py-0">
         <Link
-          className="inline-flex items-center gap-2.5 text-base font-semibold tracking-tight"
+          className="inline-flex items-center gap-2.5 text-base font-extrabold tracking-[-0.03em]"
           href="/"
           aria-label="Jashn Tickets home"
         >
           <span
-            className="flex h-7 w-7 rotate-[-8deg] items-end justify-center gap-0.75 rounded-lg border border-white/40 p-1"
+            className="grid h-8 w-8 rotate-[-6deg] place-items-center rounded-xl bg-violet text-sm font-black text-white shadow-[3px_3px_0_0_#c7f36b]"
             aria-hidden="true"
           >
-            <span className="h-2 w-0.75 rounded-full bg-coral" />
-            <span className="h-4 w-0.75 rounded-full bg-coral" />
-            <span className="h-3 w-0.75 rounded-full bg-coral" />
+            J
           </span>
           <span>
-            Jashn <strong className="font-bold text-coral">Tickets</strong>
+            Jashn <strong className="font-black text-violet">Tickets</strong>
           </span>
         </Link>
 
         <nav
-          className="order-3 flex w-full items-center justify-between gap-4 text-sm text-white/70 sm:order-none sm:w-auto sm:gap-7"
+          className="order-3 flex w-full items-center justify-between gap-4 text-sm font-semibold text-secondary sm:order-none sm:w-auto sm:gap-7"
           aria-label="Main navigation"
         >
           {navigationLinks.map((link) => (
             <Link
-              className="py-2 transition-colors hover:text-paper sm:py-7"
+              className="rounded-full px-2 py-2 transition-colors hover:bg-lavender hover:text-violet sm:py-2"
               href={link.href}
               key={link.href}
             >
@@ -45,10 +43,10 @@ export default function Navbar() {
         </nav>
 
         <Link
-          className="inline-flex items-center gap-2 rounded-full border border-white/25 px-3.5 py-2 text-xs font-semibold transition-colors hover:border-coral hover:bg-white/5"
+          className="inline-flex items-center gap-2 rounded-full bg-violet px-4 py-2.5 text-xs font-bold text-white shadow-[0_8px_18px_rgba(115,87,255,0.22)] transition-transform hover:-translate-y-0.5 hover:bg-[#6247ed]"
           href="/events"
         >
-          Find an event <span className="text-base text-coral" aria-hidden="true">↗</span>
+          Explore events <span className="text-base text-lime" aria-hidden="true">↗</span>
         </Link>
       </div>
     </header>
