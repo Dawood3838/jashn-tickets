@@ -1,26 +1,76 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-violet: #7357ff;
+  --color-charcoal: #111827;
+  --color-lime: #c7f36b;
+  --color-lavender: #f4f1ff;
+  --color-white: #ffffff;
+  --color-secondary: #6b7280;
+  --color-border: #e5e7eb;
+  --color-muted-surface: #f9fafb;
+  --focus-ring: #7357ff;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "DM Sans", "Inter", "Segoe UI", sans-serif;
+  --color-violet: var(--color-violet);
+  --color-charcoal: var(--color-charcoal);
+  --color-lime: var(--color-lime);
+  --color-lavender: var(--color-lavender);
+  --color-white: var(--color-white);
+  --color-secondary: var(--color-secondary);
+  --color-border: var(--color-border);
+  --color-muted-surface: var(--color-muted-surface);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--color-white);
+  color: var(--color-charcoal);
+  font-family: "DM Sans", "Inter", "Segoe UI", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a,
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--color-lime);
+  color: var(--color-charcoal);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
