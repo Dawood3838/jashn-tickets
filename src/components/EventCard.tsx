@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { getEventStartingPrice } from "@/lib/event-discovery";
+import type { Event, EventArtwork } from "@/types/event";
 
 export interface EventCardArtwork {
   type: "image" | "artwork";
@@ -19,6 +21,69 @@ export interface EventCardProps {
   price: string;
   artwork: EventCardArtwork;
   href: string;
+}
+
+const artworkThemeClasses: Record<EventArtwork["theme"], string> = {
+  violet: "bg-violet",
+  lime: "bg-lime",
+  lavender: "bg-lavender",
+  charcoal: "bg-charcoal",
+};
+
+function formatEventDate(dateValue: string): string {
+  const dateParts = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateValue);
+  if (!dateParts) {
+    return dateValue;
+  }
+
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const month = monthNames[Number(dateParts[2]) - 1];
+  return month
+    ? `${Number(dateParts[3])} ${month} ${dateParts[1]}`
+    : dateValue;
+}
+
+export function toEventCardProps(event: Event): EventCardProps {
+  const artwork: EventCardArtwork =
+    event.image.type === "image"
+      ? {
+          type: "image",
+          src: event.image.src,
+          alt: event.image.alt,
+        }
+      : {
+          type: "artwork",
+          alt: event.image.alt,
+          className: artworkThemeClasses[event.image.theme],
+        };
+
+  const startingPrice = new Intl.NumberFormat("en-PK", {
+    maximumFractionDigits: 2,
+  }).format(getEventStartingPrice(event));
+
+  return {
+    title: event.title,
+    category: event.category,
+    date: `${formatEventDate(event.date)} · ${event.time}`,
+    venue: event.venue,
+    city: event.city,
+    price: `${event.currency} ${startingPrice}`,
+    artwork,
+    href: `/events/${encodeURIComponent(event.id)}`,
+  };
 }
 
 export default function EventCard({
