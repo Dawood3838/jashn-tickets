@@ -1,7 +1,10 @@
 import Link from "next/link";
 import CategoryCard from "@/components/CategoryCard";
+import EventCard, { toEventCardProps } from "@/components/EventCard";
 import HeroSection from "@/components/HeroSection";
 import SectionHeading from "@/components/SectionHeading";
+import { getAllEvents } from "@/data/events";
+import { getEvents } from "@/lib/event-discovery";
 
 const categories = [
   { icon: "♫", name: "Concerts", description: "Live sounds, loud memories" },
@@ -12,9 +15,18 @@ const categories = [
   { icon: "↗", name: "Sports", description: "Feel every second" },
 ] as const;
 
-const featuredEventPlaceholders = ["01", "02", "03"] as const;
-
 export default function Home() {
+  const events = getAllEvents();
+  const featuredEvents = getEvents(events, {
+    featured: true,
+    sortBy: "date-asc",
+  });
+  const homepageEvents = (
+    featuredEvents.length > 0
+      ? featuredEvents
+      : getEvents(events, { sortBy: "date-asc" })
+  ).slice(0, 3);
+
   return (
     <>
       <HeroSection />
@@ -24,7 +36,11 @@ export default function Home() {
           <SectionHeading
             eyebrow="The city, on your calendar"
             heading={<>Plans made <span className="text-violet">brighter.</span></>}
-            description="Find something that fits your mood, your calendar and your city."
+            description={
+              featuredEvents.length > 0
+                ? "Find something that fits your mood, your calendar and your city."
+                : "No events are featured just yet, so here are some upcoming experiences."
+            }
             action={
               <Link
                 className="inline-flex items-center gap-2 rounded-full border border-violet/20 px-4 py-2.5 text-sm font-bold text-violet transition-colors hover:border-violet hover:bg-lavender"
@@ -35,37 +51,14 @@ export default function Home() {
             }
           />
 
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {featuredEventPlaceholders.map((placeholder, index) => (
-              <div
-                className="overflow-hidden rounded-3xl border border-violet/10 bg-white shadow-[0_14px_35px_rgba(17,24,39,0.06)]"
-                key={placeholder}
-                aria-hidden="true"
-              >
-                <div className={`relative flex h-48 items-end overflow-hidden p-5 ${index === 1 ? "bg-charcoal" : "bg-violet"}`}>
-                  <span className="absolute -right-10 -top-12 h-48 w-48 rounded-full border-[24px] border-lime/80" />
-                  <span className="absolute -bottom-16 -left-10 h-48 w-48 rounded-full bg-white/10" />
-                  <span className="relative text-5xl font-black text-white/90">
-                    {index === 0 ? "✦" : index === 1 ? "◎" : "✳"}
-                  </span>
-                  <span className="absolute right-5 top-5 rounded-full bg-white/90 px-3 py-1 text-[0.6rem] font-extrabold uppercase tracking-[0.12em] text-violet">
-                    Coming soon
-                  </span>
-                </div>
-                <div className="space-y-4 p-5">
-                  <div className="h-2 w-24 rounded-full bg-lavender" />
-                  <div className="h-5 w-4/5 rounded-full bg-lavender" />
-                  <div className="h-3 w-3/5 rounded-full bg-lavender" />
-                  <div className="border-t border-border pt-4">
-                    <div className="h-3 w-1/2 rounded-full bg-lavender" />
-                  </div>
-                </div>
-              </div>
+          <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {homepageEvents.map((event) => (
+              <EventCard
+                {...toEventCardProps(event)}
+                key={event.id}
+              />
             ))}
           </div>
-          <p className="mt-5 text-right text-xs font-semibold text-secondary">
-            Featured event cards will connect to Division 2&apos;s typed catalogue.
-          </p>
         </div>
       </section>
 
@@ -91,6 +84,7 @@ export default function Home() {
                 {...category}
                 key={category.name}
                 number={`0${index + 1}`}
+                href={`/events?category=${encodeURIComponent(category.name.toLowerCase())}`}
               />
             ))}
           </div>

@@ -4,15 +4,15 @@ import FAQItem from "@/components/FAQItem";
 const faqs = [
   {
     question: "How will I find an event?",
-    answer: "Use the Events page to browse the catalogue by category, then search and filter once the discovery controls are connected.",
+    answer: "Browse the event catalogue, search for what interests you, combine category, city and availability filters, then sort by date or ticket price.",
   },
   {
     question: "How do tickets and booking work?",
-    answer: "Select an event and ticket option, review your order, then provide attendee details before confirming your simulated booking.",
+    answer: "Choose ticket quantities on an event page, continue to booking, and enter attendee details to create a pending booking. It is held in memory for the current browser session; no payment is taken and tickets are not reserved.",
   },
   {
     question: "Is this a real ticketing service?",
-    answer: "Jashn Tickets is a university project foundation. Payment, live inventory and ticket issuance will be represented by the completed application flow.",
+    answer: "Jashn Tickets is a university project. Payment, live inventory, ticket reservation and ticket issuance are not available; bookings are pending in-memory records.",
   },
   {
     question: "Which cities are covered?",
