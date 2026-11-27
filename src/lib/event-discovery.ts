@@ -16,6 +16,8 @@ export interface EventFilters {
   cities?: readonly EventCity[];
   availabilityStatuses?: readonly EventAvailabilityStatus[];
   featured?: boolean;
+  startDate?: string;
+  endDate?: string;
 }
 
 export interface EventQueryOptions extends EventFilters {
@@ -52,6 +54,14 @@ export function filterEvents(
   events: readonly Event[],
   filters: EventFilters = {},
 ): Event[] {
+  if (
+    filters.startDate &&
+    filters.endDate &&
+    filters.endDate < filters.startDate
+  ) {
+    return [];
+  }
+
   return events.filter((event) => {
     if (
       filters.categories?.length &&
@@ -75,6 +85,14 @@ export function filterEvents(
       filters.featured !== undefined &&
       event.featured !== filters.featured
     ) {
+      return false;
+    }
+
+    if (filters.startDate && event.date < filters.startDate) {
+      return false;
+    }
+
+    if (filters.endDate && event.date > filters.endDate) {
       return false;
     }
 

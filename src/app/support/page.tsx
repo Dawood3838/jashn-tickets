@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import FAQItem from "@/components/FAQItem";
+
+export const metadata: Metadata = {
+  title: "Support",
+  description: "Find help and answers about using Jashn Tickets.",
+};
 
 const faqs = [
   {

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import BookingForm from "@/components/BookingForm";
 import { getEventById } from "@/data/events";
@@ -17,6 +18,11 @@ interface BookingPageProps {
 interface BookingFormFromParamsProps {
   searchParams: Promise<BookingSearchParams>;
 }
+
+export const metadata: Metadata = {
+  title: "Book Tickets",
+  description: "Review your ticket selection and complete your booking.",
+};
 
 function toValues(value: string | string[] | undefined): string[] {
   if (typeof value === "string") {

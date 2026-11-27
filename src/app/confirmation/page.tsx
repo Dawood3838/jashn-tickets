@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import ConfirmationPanel from "@/components/ConfirmationPanel";
@@ -13,6 +14,11 @@ interface ConfirmationPageProps {
 interface ConfirmationContentProps {
   searchParams: Promise<ConfirmationSearchParams>;
 }
+
+export const metadata: Metadata = {
+  title: "Booking Confirmation",
+  description: "Review your Jashn Tickets booking confirmation.",
+};
 
 const BOOKING_REFERENCE_PATTERN = /^JASHN-[0-9A-F]{32}$/;
 

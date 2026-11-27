@@ -1,8 +1,14 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import CategoryCard from "@/components/CategoryCard";
 import EventDiscovery from "@/components/EventDiscovery";
 import EventsHeader from "@/components/EventsHeader";
 import { getAllEvents } from "@/data/events";
+
+export const metadata: Metadata = {
+  title: "Explore Events",
+  description: "Browse upcoming events, discover experiences and find tickets.",
+};
 
 const categories = [
   { icon: "♫", name: "Concerts", description: "Live sounds, loud memories" },

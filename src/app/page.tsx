@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import CategoryCard from "@/components/CategoryCard";
 import EventCard, { toEventCardProps } from "@/components/EventCard";
@@ -5,6 +6,11 @@ import HeroSection from "@/components/HeroSection";
 import SectionHeading from "@/components/SectionHeading";
 import { getAllEvents } from "@/data/events";
 import { getEvents } from "@/lib/event-discovery";
+
+export const metadata: Metadata = {
+  title: "Home",
+  description: "Discover events and book experiences with Jashn Tickets.",
+};
 
 const categories = [
   { icon: "♫", name: "Concerts", description: "Live sounds, loud memories" },

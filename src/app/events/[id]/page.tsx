@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -10,6 +11,29 @@ export const instant = false;
 
 interface EventDetailsPageProps {
   params: Promise<{ id: string }>;
+}
+
+interface EventMetadataProps {
+  params: Promise<{ id: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: EventMetadataProps): Promise<Metadata> {
+  const { id } = await params;
+  const event = getEventById(id);
+
+  if (!event) {
+    return {
+      title: "Event Not Found",
+      description: "The requested Jashn Tickets event could not be found.",
+    };
+  }
+
+  return {
+    title: event.title,
+    description: `${event.description} At ${event.venue} in ${event.city}.`,
+  };
 }
 
 export function generateStaticParams() {

@@ -33,6 +33,8 @@ export default function EventDiscovery({
     useState<EventAvailabilityStatus | "">("");
   const [featuredOnly, setFeaturedOnly] = useState(false);
   const [sortBy, setSortBy] = useState<EventSortOrder>("date-asc");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   const categories = [...new Set(events.map((event) => event.category))];
   const requestedCategory = searchParams.get("category")?.trim().toLowerCase();
@@ -44,6 +46,10 @@ export default function EventDiscovery({
   const availabilityStatuses = [
     ...new Set(events.map((event) => event.availability.status)),
   ];
+  const dateRangeError =
+    startDate && endDate && endDate < startDate
+      ? "The end date must be on or after the start date."
+      : "";
 
   const visibleEvents = getEvents(events, {
     query,
@@ -51,6 +57,8 @@ export default function EventDiscovery({
     cities: city ? [city] : undefined,
     availabilityStatuses: availability ? [availability] : undefined,
     featured: featuredOnly ? true : undefined,
+    startDate: startDate || undefined,
+    endDate: endDate || undefined,
     sortBy,
   });
 
@@ -60,6 +68,8 @@ export default function EventDiscovery({
       city ||
       availability ||
       featuredOnly ||
+      startDate ||
+      endDate ||
       sortBy !== "date-asc",
   );
 
@@ -84,6 +94,8 @@ export default function EventDiscovery({
     setAvailability("");
     setFeaturedOnly(false);
     setSortBy("date-asc");
+    setStartDate("");
+    setEndDate("");
   }
 
   return (
@@ -176,6 +188,40 @@ export default function EventDiscovery({
               ))}
             </select>
           </label>
+
+          <label className="grid gap-2 text-sm font-bold text-charcoal">
+            From date
+            <input
+              aria-invalid={Boolean(dateRangeError)}
+              aria-describedby={dateRangeError ? "date-range-error" : undefined}
+              className="min-h-12 min-w-0 rounded-2xl border border-border bg-white px-4 text-sm font-normal outline-none transition-colors focus:border-violet"
+              type="date"
+              value={startDate}
+              onChange={(event) => setStartDate(event.target.value)}
+            />
+          </label>
+
+          <label className="grid gap-2 text-sm font-bold text-charcoal">
+            To date
+            <input
+              aria-invalid={Boolean(dateRangeError)}
+              aria-describedby={dateRangeError ? "date-range-error" : undefined}
+              className="min-h-12 min-w-0 rounded-2xl border border-border bg-white px-4 text-sm font-normal outline-none transition-colors focus:border-violet"
+              type="date"
+              value={endDate}
+              onChange={(event) => setEndDate(event.target.value)}
+            />
+          </label>
+
+          {dateRangeError && (
+            <p
+              className="text-sm font-bold text-red-700 sm:col-span-2 lg:col-span-3"
+              id="date-range-error"
+              role="alert"
+            >
+              {dateRangeError}
+            </p>
+          )}
 
           <label className="grid gap-2 text-sm font-bold text-charcoal">
             Sort events
