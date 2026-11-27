@@ -137,6 +137,9 @@ The branch and commit history supports this division allocation: `division-1-fro
 
 GitHub Repository: [https://github.com/Dawood3838/jashn-tickets](https://github.com/Dawood3838/jashn-tickets)
 
+## Vercel
+Vercel Deployment: [https://jashn-tickets-hdo6.vercel.app](https://jashn-tickets-hdo6.vercel.app/)
+
 ## Submission Links
 
 - Vercel deployment: **[PLACEHOLDER - add the deployed Vercel URL before submission]**
